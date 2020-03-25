@@ -55,7 +55,7 @@ while y <= k:
         for i in v[y]:
             reuniune += M[i][j]
         if reuniune:
-            M2[y][j] = reuniune
+            M2[y][j] = set(reuniune)
             if not apartine(set(reuniune), v):
                 k += 1
                 v.append(set(reuniune))
@@ -69,20 +69,26 @@ for i in range(k + 1):
 
 #afisare:
 print()
-print("Indicii liniilor matricei:")
+print("Starile:")
 print(v)
 print()
+print("Alfabetul este acelasi:")
+print(a)
 print()
-print("Matricea DFA ului:")
+print("Starea initiala:")
+print({qz})
 print()
-for i in range(k):
-    print("Linia pentru starea "+str(v[i])+" este : ",M2[i])
-print()
-print("Automatul este:")
-for i in range(k):
+print("Tranzitiile automatului:")
+for i in range(k+1):
     for j in range(m):
-        print("Din starea "+str(v[i])+" ajung cu simbolul ",a[j]," in starea ",M2[i][j])
-        print()
+        if M2[i][j]:
+            print("Din starea "+str(v[i])+" ajung cu simbolul ",a[j]," in starea ",M2[i][j])
+print()
 print("Stari finale:")
 for i in range(len(qf2)):
     print(v[qf2[i]])
+print()
+print("Matricea DFA ului:")
+for i in range(k+1):
+    print("Linia pentru starea "+str(v[i])+" este : ",M2[i])
+print()
