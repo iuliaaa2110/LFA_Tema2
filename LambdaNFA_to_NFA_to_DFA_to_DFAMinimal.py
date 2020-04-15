@@ -93,7 +93,6 @@ def LambdaNFA_to_NFA(automat):
             M2[i] = M2[i + 1]   #o sa dezaloc liniile ramase in plus mai tarziu
 
 
-
     def pas1():
         nonlocal m
         for i in range(n):
@@ -189,9 +188,9 @@ def LambdaNFA_to_NFA(automat):
     return automat2
 
 
-
 def NFA_to_DFA(automat):
 
+    
     def stare_finala(s):
         nonlocal qf
         if s.intersection(s,set(qf)) != set():
@@ -205,6 +204,7 @@ def NFA_to_DFA(automat):
             if stare_finala(v[i]):
                 qf2.append(v[i])
 
+                
     def rezolvare():
         nonlocal y,k,M2,v,ds
         while y <= k:
@@ -222,6 +222,7 @@ def NFA_to_DFA(automat):
 
 
     # 1)explicitez automatul:
+    
     # (extrag doar ce am de gand sa folosesc:)
 
     n = automat[0]  # nr de stari=nr de linii
@@ -278,6 +279,7 @@ def NFA_to_DFA(automat):
 
 
 def DFA_to_DFAMinimal(automat):
+    
     global d
 
     def noua_stare(x):
@@ -321,6 +323,7 @@ def DFA_to_DFAMinimal(automat):
                 app[v.index(M2[i][j])] = 1
                 parcurg(v.index(M2[i][j]))  # pozitia starii M[i][j] in vectorul de stari
 
+                
     def pas1_a():
         nonlocal A
         for i in range(n):
@@ -334,6 +337,7 @@ def DFA_to_DFAMinimal(automat):
                 if (i in qf and l not in qf) or (i not in qf and l in qf):  # daca una e stare finala si cealalta nu e
                     A[i][l] = False
 
+                    
     def pas1_c():
         nonlocal A,M,n
 
@@ -353,6 +357,8 @@ def DFA_to_DFAMinimal(automat):
                                 if a!=b and A[a][b] == False and A[i][l] != False: # j este simbolul. Daca ( ~(i,j),~(l,j) ), atunci marchez (i,l)
                                     A[i][l] = False                                                         #M[i][j]= ~(i,j)
                                     k=1                                                                     #A [M[[i][j]]] [M[[l][j]]]= (i,j)
+    
+    
     def pas2():
         nonlocal M2,v,n2
         marchez=[0]*n
@@ -387,6 +393,7 @@ def DFA_to_DFAMinimal(automat):
             for j in (noua_stare(qf[0])):
                 qf.remove(j)        #distrug multimea initiala de stari finale
 
+                
     def pas4():
         nonlocal n2,M2,v,ok,nu
         i=0
@@ -430,6 +437,7 @@ def DFA_to_DFAMinimal(automat):
     qf=automat[6]
 
     #verificare1: daca automatul a fost citit de la tastatura
+    
     if len(M[0])==m+2:  #inseamna ca am apelat cu un automat citit de la tastatura, deoarece pt acela eu am retinut spatiu m+2 coloane
         for i in range(n):  #fac doua modificari Matricei deoarece citirea in main a fost conceputa pt un Nfa, trebuie sa o adaptez pt dfa
             M[i].pop(m)
@@ -460,6 +468,7 @@ def DFA_to_DFAMinimal(automat):
             for j in range(m):
                 M[i][j]=stari.index(M[i][j])
 
+                
     #declar variabile:
 
     A = []
@@ -472,6 +481,7 @@ def DFA_to_DFAMinimal(automat):
     nu=[]
     app=[]
 
+    
     #2)Rezolvarea propriu-zisa:
 
     pas1_a()    #construiesc matricea de echivalenta si o initializez cu TRUE
@@ -481,7 +491,6 @@ def DFA_to_DFAMinimal(automat):
     pas3()
     pas4()
     pas5()
-
 
 
     #3)Imi construiesc noul automat:
@@ -503,9 +512,8 @@ def DFA_to_DFAMinimal(automat):
     automat2[7]=len(tranzitii2)
     automat2[8]=tranzitii2
     automat2[9]=M2
+    
     return automat2
-
-
 
 
 # main:
