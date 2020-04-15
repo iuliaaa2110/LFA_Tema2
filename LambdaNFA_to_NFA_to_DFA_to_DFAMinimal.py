@@ -316,7 +316,7 @@ def DFA_to_DFAMinimal(automat):
         v.remove(stare)
 
 
-    def parcurg(i): #e foarte asemanator cu dead_end
+    def parcurg(i):
         nonlocal M2,v,app
         for j in range(m):
             if M2[i][j] in v and app[v.index(M2[i][j])] == 0:  # Daca starea in care ma duc este diferita de cele prin care am trecut pana acum ( daca sunt egale subprogramul se opreste pt a nu intra in ciclu infinit )
