@@ -302,7 +302,6 @@ def NFA_to_DFA(automat):
 
 
 def DFA_to_DFAMinimal(automat):
-    global d
 
     def noua_stare(x):  #noua_stare(x) imi returneaza acea stare din automatul nou care contine starea x din automatul vechi
         nonlocal v
