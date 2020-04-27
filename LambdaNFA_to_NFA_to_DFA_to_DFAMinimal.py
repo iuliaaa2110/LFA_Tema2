@@ -2,6 +2,7 @@ def afisare(automat):
     print("Automatul rezultat:")
     print()
 
+
     print("Numar de stari:")
     print(automat[0])
     print()
@@ -37,10 +38,11 @@ def afisare(automat):
     print(automat[7])
     print()
 
+
     print("Tranzitiile")
     for i in range(automat[7]):
         for j in range(3):
-            print(automat[8][i][j],end="  ")
+            print(automat[8][i][j], end="  ")
         print()
 
 
@@ -262,12 +264,15 @@ def NFA_to_DFA(automat):
     v = []
     M2 = []
     k = 0
+
     v.append({qz})  #vector de stari
     M2.append([[] for i in range(m)])
     for j in range(m):
-        k += 1
-        v.append(set(M[qz][j]))
+        if set(M[qz][j]) not in v:
+            k += 1
+            v.append(set(M[qz][j]))
         M2[0][j] = set(M[qz][j])
+
     qf2 = []  # vector de stari finale
     y = 1
 
@@ -283,6 +288,7 @@ def NFA_to_DFA(automat):
     automat2=[0]*10
     automat2[0]=k+1
     automat2[1]=v
+    print(v)
     automat2[2]=m
     automat2[3]=automat[3]
     automat2[4]={qz}
@@ -557,7 +563,7 @@ automat[6]=qf       #vectorul de stari finale
 automat[7]=t        #numarul de tranzitii
 automat[8]=tranzitii
 
-automat1=LambdaNFA_to_NFA(automat)
+#automat1=LambdaNFA_to_NFA(automat)
 automat2=NFA_to_DFA(automat)
-automat3=DFA_to_DFAMinimal(automat)
-afisare(automat3)
+#automat3=DFA_to_DFAMinimal(automat)
+afisare(automat2)
